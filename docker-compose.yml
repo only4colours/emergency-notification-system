@@ -1,0 +1,9 @@
+﻿services:
+  notification-service:
+    image: notification-service
+    container_name: notification-service
+    build:
+      context: .
+      dockerfile: notification-service/Dockerfile
+    ports:
+      - 8080:8080
