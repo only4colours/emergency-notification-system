@@ -8,5 +8,4 @@ public class Recipient
     public Guid Id { get; init; }
     
     public string? PhoneNumber { get; set; }
-    public string? TelegramId { get; set; }
 }
