@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "Hash": "7DzCpQhBw6TbwYcmLUUV59S2FxbvTKPo0WMV92TkekY=",
+  "Source": "recipient-service",
+  "BasePath": "_content/recipient-service",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}

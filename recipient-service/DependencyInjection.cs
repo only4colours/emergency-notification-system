@@ -9,8 +9,8 @@ public static class DependencyInjection
     {
         services.AddEndpointsApiExplorer();
         services.AddSwaggerGen();
-
+        
         services.AddDbContext<RecipientDbContext>(options =>
-            options.UseNpgsql(configuration.GetValue<string>("ConnectionsStrings:Postgres")));
+            options.UseNpgsql(configuration.GetValue<string>("ConnectionStrings:Postgres")));
     }
 }

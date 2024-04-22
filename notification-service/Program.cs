@@ -1,26 +1,19 @@
-using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using notification_service;
-using Twilio.Rest.Api.V2010.Account;
-using Twilio.Types;
+using notification_service.Database;
+using notification_service.Endpoints;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddServices(builder.Configuration);
 var app = builder.Build();
 
-app.MapPost("/send", ([FromBody] string text) =>
-{
-    var messageOptions = new CreateMessageOptions(
-        new PhoneNumber("+380674200517"))
-    {
-        From = new PhoneNumber("+12096617773"),
-        Body = text
-    };
-
-    var message = MessageResource.Create(messageOptions);
-    Console.WriteLine(message.Status);
-});
-
 app.UseSwagger();
 app.UseSwaggerUI();
+
+app.MapGroup("notifications").MapNotifications();
+
+using var serviceScope = app.Services.GetService<IServiceScopeFactory>()?.CreateScope();
+var context = serviceScope!.ServiceProvider.GetRequiredService<NotificationDbContext>();
+await context.Database.MigrateAsync();
 
 app.Run();
