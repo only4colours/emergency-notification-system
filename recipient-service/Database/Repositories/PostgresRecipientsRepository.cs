@@ -18,14 +18,15 @@ public class PostgresRecipientsRepository(RecipientDbContext db) : IRecipientsRe
         return recipient ?? null;
     }
 
-    public async Task<Recipient?> EditByIdAsync(Guid id, string phoneNumber)
+    public async Task<Recipient?> EditByIdAsync(Guid id, string? phoneNumber)
     { 
         var recipient = await db.Recipients.FindAsync(id);
         if (recipient is null)
             return null;
-
-        recipient.PhoneNumber = phoneNumber;
-
+        
+        if (phoneNumber is not null)
+            recipient.PhoneNumber = phoneNumber;
+        
         db.Recipients.Update(recipient);
         await db.SaveChangesAsync();
 

@@ -18,5 +18,3 @@ FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
 ENTRYPOINT ["dotnet", "notification-service.dll"]
-
-EXPOSE 8080
