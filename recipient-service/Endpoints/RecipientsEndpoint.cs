@@ -9,7 +9,7 @@ public static class RecipientsEndpoint
     public static void MapRecipients(this RouteGroupBuilder app)
     {
         app.MapPost("/", async (
-            [FromServices] IRecipientsRepository recipientsRepository, 
+            [FromServices] IRecipientsRepository recipientsRepository,
             [FromBody] Recipient recipient) =>
         {
             await recipientsRepository.AddAsync(recipient);
@@ -20,7 +20,7 @@ public static class RecipientsEndpoint
             [FromRoute] Guid id) =>
         {
             var recipient = await recipientsRepository.GetByIdAsync(id);
-            
+
             return recipient is null ? Results.NotFound("Recipient wasn't found") : Results.Ok(recipient);
         });
 
@@ -29,24 +29,17 @@ public static class RecipientsEndpoint
             [FromRoute] Guid id,
             [FromBody] Recipient recipient) =>
         {
-            if (recipient.PhoneNumber is not null)
-            {
-                var editedRecipient = await recipientsRepository.EditByIdAsync(id, recipient.PhoneNumber); //TODO: Don't like variable name
-                if (editedRecipient is null)
-                {
-                    return Results.NotFound("Recipient wasn't found");
-                }
-            }
+            var editedRecipient = await recipientsRepository.EditByIdAsync(id, recipient.PhoneNumber); //TODO: Don't like variable name
             
-            return Results.Ok();
+            return editedRecipient is null ? Results.NotFound("Recipient wasn't found") : Results.Ok(editedRecipient);
         });
-        
+
         app.MapDelete("/{id:guid}", async (
             [FromServices] IRecipientsRepository recipientsRepository,
             [FromRoute] Guid id) =>
         {
             var recipient = await recipientsRepository.DeleteByIdAsync(id);
-            
+
             return recipient is null ? Results.NotFound("Recipient wasn't found") : Results.Ok(recipient);
         });
     }
