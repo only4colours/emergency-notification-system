@@ -1,0 +1,32 @@
+{
+  "Routes": [
+    {
+      "DownstreamPathTemplate": "/api/templates/{id}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "template-service",
+          "Port": 8080
+        }
+      ],
+      "UpstreamPathTemplate": "/templates/{id}",
+      "UpstreamHttpMethod": [ "GET" ],
+      "SwaggerKey": "templates"
+    }
+  ],
+  "SwaggerEndPoints": [
+    {
+      "Key": "templates",
+      "Config": [
+        {
+          "Name": "template-service",
+          "Version": "v1",
+          "Url": "http://localhost:8082/swagger/v1/swagger.json"
+        }
+      ]
+    }
+  ],
+  "GlobalConfiguration": {
+    "BaseUrl": "http://localhost"
+  }
+}

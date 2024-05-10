@@ -10,7 +10,7 @@ var app = builder.Build();
 app.UseSwagger(); 
 app.UseSwaggerUI();
 
-app.MapGroup("/templates").MapTemplates();
+app.MapGroup("/api/templates").WithTags("Templates").MapTemplates();
 
 using var serviceScope = app.Services.GetService<IServiceScopeFactory>()?.CreateScope();
 var context = serviceScope!.ServiceProvider.GetRequiredService<TemplateDbContext>();
