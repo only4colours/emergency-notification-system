@@ -1,48 +1,64 @@
 ﻿services:
-  kafka:
-    image: confluentinc/cp-kafka:latest
-    container_name: kafka
-    ports:
-      - 9092:9092
-    depends_on:
-      - zookeeper
-    environment:
-      KAFKA_BROKER_ID: 1
-      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
-      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,PLAINTEXT_INTERNAL:PLAINTEXT
-      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://localhost:9092,PLAINTEXT_INTERNAL://kafka:29092
-      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
-      KAFKA_TRANSACTION_STATE_LOG_MIN_ISR: 1
-      KAFKA_TRANSACTION_STATE_LOG_REPLICATION_FACTOR: 1
-  zookeeper:
-    image: confluentinc/cp-zookeeper:latest
-    container_name: zookeeper
-    environment:
-      ZOOKEEPER_CLIENT_PORT: 2181
-      ZOOKEEPER_TICK_TIME: 2000
+#  kafka:
+#    image: confluentinc/cp-kafka:latest
+#    container_name: kafka
+#    ports:
+#      - 9092:9092
+#    depends_on:
+#      - zookeeper
+#    environment:
+#      KAFKA_BROKER_ID: 1
+#      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+#      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,PLAINTEXT_INTERNAL:PLAINTEXT
+#      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://localhost:9092,PLAINTEXT_INTERNAL://kafka:29092
+#      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+#      KAFKA_TRANSACTION_STATE_LOG_MIN_ISR: 1
+#      KAFKA_TRANSACTION_STATE_LOG_REPLICATION_FACTOR: 1
+#  zookeeper:
+#    image: confluentinc/cp-zookeeper:latest
+#    container_name: zookeeper
+#    environment:
+#      ZOOKEEPER_CLIENT_PORT: 2181
+#      ZOOKEEPER_TICK_TIME: 2000
 
-  recipient-service:
-    image: recipient-service
-    container_name: recipient-service
+  api-gateway:
+    image: api-gateway
+    container_name: api-gateway
     build:
       context: .
-      dockerfile: recipient-service/Dockerfile
+      dockerfile: api-gateway/Dockerfile
     ports:
       - 8080:8080
     depends_on:
-      - recipient-service-postgres
-      - kafka
-      - zookeeper
-  recipient-service-postgres:
-    image: postgres:latest
-    container_name: recipient-service-postgres
-    restart: always
-    ports:
-      - 5432:5432
-    volumes:
-      - /Users/merlin/Volumes/docker/postgres:/var/lib/postgresql/recipient-service-postgres/data
-    environment:
-      - POSTGRES_PASSWORD=postgres
+#      - recipient-service
+#      - recipient-service-postgres
+      - template-service
+      - template-service-postgres
+#      - kafka
+#      - zookeeper
+
+#  recipient-service:
+#    image: recipient-service
+#    container_name: recipient-service
+#    build:
+#      context: .
+#      dockerfile: recipient-service/Dockerfile
+#    ports:
+#      - 8081:8080
+#    depends_on:
+#      - recipient-service-postgres
+#      - kafka
+#      - zookeeper
+#  recipient-service-postgres:
+#    image: postgres:latest
+#    container_name: recipient-service-postgres
+##    restart: always
+#    ports:
+#      - 5432:5432
+#    volumes:
+#      - /Users/merlin/Volumes/docker/postgres:/var/lib/postgresql/recipient-service-postgres/data
+#    environment:
+#      - POSTGRES_PASSWORD=postgres
 
   template-service:
     image: template-service
@@ -51,15 +67,15 @@
       context: .
       dockerfile: template-service/Dockerfile
     ports:
-      - 8080:8080
+      - 8082:8080
     depends_on:
       - template-service-postgres
-      - kafka
-      - zookeeper
+#      - kafka
+#      - zookeeper
   template-service-postgres:
     image: postgres:latest
     container_name: template-service-postgres
-    restart: always
+#    restart: always
     ports:
       - 5433:5432
     volumes:

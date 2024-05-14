@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "recipient-service", "recipi
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "template-service", "template-service\template-service.csproj", "{AE901D58-79AE-4905-BEA2-64EF3D901A82}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "api-gateway", "api-gateway\api-gateway.csproj", "{B0739256-D3FD-4D5C-9678-E1E3D1F5C36F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -29,5 +31,9 @@ Global
 		{AE901D58-79AE-4905-BEA2-64EF3D901A82}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AE901D58-79AE-4905-BEA2-64EF3D901A82}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AE901D58-79AE-4905-BEA2-64EF3D901A82}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B0739256-D3FD-4D5C-9678-E1E3D1F5C36F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B0739256-D3FD-4D5C-9678-E1E3D1F5C36F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B0739256-D3FD-4D5C-9678-E1E3D1F5C36F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B0739256-D3FD-4D5C-9678-E1E3D1F5C36F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
